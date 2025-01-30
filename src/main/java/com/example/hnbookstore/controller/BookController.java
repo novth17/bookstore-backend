@@ -10,6 +10,6 @@ public class BookController {
 
     @GetMapping("/index")
     public String showBookStore() {
-        return "Welcome to Lily's Bookstore!";
+        return "Welcome to Huhu's Bookstore!";
     }
 }

@@ -1,6 +1,14 @@
 package com.example.hnbookstore.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 
     private Long id;
 
@@ -9,6 +17,16 @@ public class Book {
     private String publicationYear;
     private String isbn;
     private String price;
+
+    public Book() {}
+
+    public Book(String title, String author, String publicationYear, String isbn, String price) {
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+        this.isbn = isbn;
+        this.price = price;
+    }    
 
     public Long getId() {
         return id;
