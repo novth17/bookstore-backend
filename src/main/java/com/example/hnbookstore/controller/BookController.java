@@ -52,7 +52,6 @@ public class BookController {
         return "redirect:/booklist";
     }
 
-
     @GetMapping("/edit/{id}")
     public String showEditBookForm(@PathVariable("id") Long id, Model model) {
         Optional<Book> book = bookRepository.findById(id);
