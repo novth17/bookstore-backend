@@ -6,12 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.hnbookstore.domain.Book;
 import com.example.hnbookstore.domain.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
+
 
 @Controller
 public class BookController {
@@ -48,4 +51,38 @@ public class BookController {
         bookRepository.deleteById(id);
         return "redirect:/booklist";
     }
+
+
+    @GetMapping("/edit/{id}")
+    public String showEditBookForm(@PathVariable("id") Long id, Model model) {
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isPresent()) {
+            model.addAttribute("book", book.get());
+            return "editbook";
+        } else {
+            return "redirect:/booklist";
+        }
+    }
+
+    @PostMapping("/edit/{id}")
+    public String updateBook(@PathVariable("id") Long id,
+                         @RequestParam String title,
+                         @RequestParam String author,
+                         @RequestParam String publicationYear,
+                         @RequestParam String isbn,
+                         @RequestParam double price) {
+    Optional<Book> bookOptional = bookRepository.findById(id);
+    if (bookOptional.isPresent()) {
+        Book book = bookOptional.get();
+        book.setTitle(title);
+        book.setAuthor(author);
+        book.setPublicationYear(publicationYear);
+        book.setIsbn(isbn);
+        book.setPrice(price);
+        bookRepository.save(book);
+    }
+    return "redirect:/booklist";
+}
+
+
 }
