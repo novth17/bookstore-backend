@@ -9,18 +9,17 @@ import jakarta.persistence.Id;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Long id;
 
     private String title;
     private String author;
     private String publicationYear;
     private String isbn;
-    private String price;
+    private double price;
 
     public Book() {}
 
-    public Book(String title, String author, String publicationYear, String isbn, String price) {
+    public Book(String title, String author, String publicationYear, String isbn, double price) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
@@ -58,10 +57,10 @@ public class Book {
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
