@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -17,51 +19,61 @@ public class Book {
     private String isbn;
     private double price;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     public Book() {}
 
-    public Book(String title, String author, String publicationYear, String isbn, double price) {
+    public Book(String title, String author, String publicationYear, String isbn, double price, Category category) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.price = price;
+        this.category = category;
     }    
 
     public Long getId() {
-        return id;
-    }
+         return id;
+        }
     public void setId(Long id) {
-        this.id = id;
+         this.id = id; 
     }
-    public String getTitle() {
-        return title;
+    public String getTitle() { 
+        return title; 
     }
     public void setTitle(String title) {
-        this.title = title;
+         this.title = title; 
     }
     public String getAuthor() {
-        return author;
-    }
+         return author; 
+        }
     public void setAuthor(String author) {
-        this.author = author;
-    }
+         this.author = author; 
+        }
     public String getPublicationYear() {
-        return publicationYear;
-    }
+         return publicationYear; 
+        }
     public void setPublicationYear(String publicationYear) {
-        this.publicationYear = publicationYear;
-    }
+         this.publicationYear = publicationYear; 
+        }
     public String getIsbn() {
-        return isbn;
-    }
+         return isbn; 
+        }
     public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
+         this.isbn = isbn; 
+        }
     public double getPrice() {
-        return price;
-    }
+         return price; 
+        }
     public void setPrice(double price) {
-        this.price = price;
-    }
-
+         this.price = price; 
+        }
+    public Category getCategory() {
+         return category; 
+        }
+    public void setCategory(Category category) {
+         this.category = category;
+        }
 }

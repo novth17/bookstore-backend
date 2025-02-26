@@ -18,12 +18,15 @@
         <th>Title</th>
         <th>Author</th>
         <th>Publication Year</th>
+        <th>Category</th> <!-- ✅ Added Category Column -->
+        <th>Actions</th>
       </tr>
       <tr th:each="book : ${books}">
         <td th:text="${book.id}"></td>
         <td th:text="${book.title}"></td>
         <td th:text="${book.author}"></td>
         <td th:text="${book.publicationYear}"></td>
+        <td th:text="${book.category != null ? book.category.name : 'No Category'}"></td>
         <td>
           <a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-warning"
             >✏️ Edit</a

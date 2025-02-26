@@ -5,6 +5,7 @@
   </head>
   <body>
     <h1>Edit Book</h1>
+    
     <form th:action="@{/edit/{id}(id=${book.id})}" method="post">
       <label>Title:</label>
       <input type="text" name="title" th:value="${book.title}" required />
@@ -34,7 +35,25 @@
         th:value="${book.price}"
         required
       />
+      <br />
+
+      <label>Category:</label>
+      <select name="categoryId" required>
+        <option value="">Select a category</option>
+        <th:block th:each="category : ${categories}">
+          <option
+            th:value="${category.id}"
+            th:text="${category.name}"
+            th:selected="${book.category != null and book.category.id == category.id}"
+          ></option>
+        </th:block>
+      </select>
+      <br />
+
       <button type="submit">Update Book</button>
     </form>
+
+    <br />
+    <a href="/booklist">Back to Book List</a>
   </body>
 </html>
