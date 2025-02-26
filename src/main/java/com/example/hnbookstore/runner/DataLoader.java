@@ -23,7 +23,7 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Check if categories exist before adding new ones
+        
         if (categoryRepository.count() == 0) {
             List<Category> categories = List.of(
                 new Category("Fiction"),
@@ -41,7 +41,6 @@ public class DataLoader implements CommandLineRunner {
             System.out.println("📚 Categories added to the database.");
         }
 
-        // Fetch categories for assigning to books
         Optional<Category> fictionCategory = categoryRepository.findByName("Fiction");
         Optional<Category> scienceCategory = categoryRepository.findByName("Science");
 
