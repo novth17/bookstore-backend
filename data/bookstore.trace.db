@@ -1,0 +1,9 @@
+2025-03-05 23:08:39.300260+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CATEGORY" not found; SQL statement:
+select count(*) from category c1_0 [42102-232]
+2025-03-05 23:08:50.760529+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CATEGORY" not found; SQL statement:
+select count(*) from category c1_0 [42102-232]
+2025-03-05 23:09:03.804629+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CATEGORY" not found; SQL statement:
+select count(*) from category c1_0 [42102-232]
