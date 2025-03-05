@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
   <head>
-    <title>Server Programming</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Book List</title>
+    <meta charset="UTF-8" />
     <link
       type="text/css"
       rel="stylesheet"
@@ -11,14 +15,25 @@
     />
   </head>
   <body>
+    <div class="container mt-3">
+      <!-- ✅ Show logged-in username -->
+      <p>Welcome, <strong th:text="${#authentication.name}"></strong>!</p>
+
+      <!-- ✅ Logout Button -->
+      <form th:action="@{/logout}" method="post" style="display: inline">
+        <button type="submit" class="btn btn-secondary">🚪 Logout</button>
+      </form>
+    </div>
+
     <h1>Book List</h1>
+
     <table class="table table-striped">
       <tr>
         <th>ID</th>
         <th>Title</th>
         <th>Author</th>
         <th>Publication Year</th>
-        <th>Category</th> <!-- ✅ Added Category Column -->
+        <th>Category</th>
         <th>Actions</th>
       </tr>
       <tr th:each="book : ${books}">
@@ -26,14 +41,22 @@
         <td th:text="${book.title}"></td>
         <td th:text="${book.author}"></td>
         <td th:text="${book.publicationYear}"></td>
-        <td th:text="${book.category != null ? book.category.name : 'No Category'}"></td>
+        <td
+          th:text="${book.category != null ? book.category.name : 'No Category'}"
+        ></td>
         <td>
           <a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-warning"
             >✏️ Edit</a
           >
-          <a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger"
-            >❌ Delete</a
+
+          <!-- ✅ Only Admins Can See Delete Button -->
+          <a
+            th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+            th:href="@{/delete/{id}(id=${book.id})}"
+            class="btn btn-danger"
           >
+            ❌ Delete
+          </a>
         </td>
       </tr>
     </table>

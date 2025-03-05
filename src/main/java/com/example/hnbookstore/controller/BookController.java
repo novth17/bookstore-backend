@@ -5,9 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.hnbookstore.domain.Book;
+import com.example.hnbookstore.domain.BookRepository;
 import com.example.hnbookstore.domain.Category;
 import com.example.hnbookstore.domain.CategoryRepository;
-import com.example.hnbookstore.domain.BookRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -25,9 +28,19 @@ public class BookController {
         this.categoryRepository = categoryRepository;
     }
 
+    // Login Page Mapping
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";  // Returns login.html from templates folder
+    }
+
+    // Show authenticated username on booklist page
     @GetMapping("/booklist")
     public String getBookList(Model model) {
-        List<Book> books = (List<Book>) bookRepository.findAll();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("username", authentication.getName()); // Pass username to Thymeleaf template
+        
+        List<Book> books = bookRepository.findAll();
         model.addAttribute("books", books);
         return "booklist";
     }
@@ -35,7 +48,7 @@ public class BookController {
     @GetMapping("/addbook")
     public String addBookForm(Model model) {
         model.addAttribute("book", new Book());
-        model.addAttribute("categories", categoryRepository.findAll()); // Load categories for dropdown
+        model.addAttribute("categories", categoryRepository.findAll());
         return "addbook";
     }
 
@@ -54,6 +67,8 @@ public class BookController {
         return "redirect:/booklist";
     }
 
+    //Only ADMIN can delete books!!!!
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/delete/{id}")
     public String deleteBook(@PathVariable Long id) {
         bookRepository.deleteById(id);
@@ -65,7 +80,7 @@ public class BookController {
         Optional<Book> book = bookRepository.findById(id);
         if (book.isPresent()) {
             model.addAttribute("book", book.get());
-            model.addAttribute("categories", categoryRepository.findAll()); // Load categories
+            model.addAttribute("categories", categoryRepository.findAll());
             return "editbook";
         } else {
             return "redirect:/booklist";
@@ -90,7 +105,7 @@ public class BookController {
             book.setPublicationYear(publicationYear);
             book.setIsbn(isbn);
             book.setPrice(price);
-            book.setCategory(categoryOptional.get()); // Assign new category
+            book.setCategory(categoryOptional.get());
             bookRepository.save(book);
         }
         return "redirect:/booklist";
