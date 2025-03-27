@@ -56,3 +56,35 @@ This project serves as the backend for a bookstore application, providing APIs f
 | GET         | `/edit/{id}`   | Loads book info for editing (`editbook.html`)               |
 | POST        | `/edit/{id}`   | Submits updated book information                            |
 | GET         | `/delete/{id}` | Deletes a book (Only accessible to users with `ADMIN` role) |
+
+🟢 **Live Demo:**  
+Check out the deployed version on Heroku:  
+
+
+
+## 🟢 Live Demo
+
+Explore the live app:  
+🔗 [Deployed Bookstore backend](https://hien-bookstore-backend-a8593b1bb704.herokuapp.com/)
+
+### 🔐 Login Information
+
+The application requires authentication to access the book list.
+
+> Default login page:  
+> [Login page](https://hien-bookstore-backend-a8593b1bb704.herokuapp.com/login)
+
+#### 👤 Test Users
+
+| Role  | Username | Password   |
+|-------|----------|------------|
+| Admin | `admin`  | `adminpass`|
+| User  | `user`   | `password` |
+
+> ⚠️ These test credentials are for demo purposes only. The app does not store real user data!
+
+### 🛠️ Access Features
+
+- ✅ `USER` can view books
+- 🛑 `USER` **cannot** delete books
+- ✅ `ADMIN` can add, edit, and delete books
