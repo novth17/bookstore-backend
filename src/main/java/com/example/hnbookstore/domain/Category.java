@@ -15,7 +15,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore // Prevents infinite loop when returning JSON
+    @JsonIgnore 
     private List<Book> books;
 
     public Category() {}
