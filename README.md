@@ -22,7 +22,7 @@ This project serves as the backend for a bookstore application, providing APIs f
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/novth17/bookstore_backend.git
+   git clone https://github.com/novth17/bookstore-backend.git
    ```
 
 2. Navigate to the project directory:
