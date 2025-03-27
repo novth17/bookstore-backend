@@ -57,11 +57,6 @@ This project serves as the backend for a bookstore application, providing APIs f
 | POST        | `/edit/{id}`   | Submits updated book information                            |
 | GET         | `/delete/{id}` | Deletes a book (Only accessible to users with `ADMIN` role) |
 
-🟢 **Live Demo:**  
-Check out the deployed version on Heroku:  
-
-
-
 ## 🟢 Live Demo
 
 Explore the live app:  
